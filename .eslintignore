@@ -6,5 +6,4 @@ node_modules/
 
 # TODO: don't ignore these examples once they're updated
 /examples/calendar-widget
-/examples/media
 /examples/tourism

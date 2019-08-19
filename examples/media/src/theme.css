@@ -1,0 +1,378 @@
+/* Global */
+
+[class^='ais-'] {
+  box-sizing: border-box;
+  font-size: 0.9rem;
+}
+
+a[class^='ais-'] {
+  color: #6e7070;
+  text-decoration: none;
+}
+
+/*
+  We need to target the root element because Angular InstantSearch
+  creates web components which are not targetable with the `*` selector.
+*/
+[class^='ais-'][class$='--disabled'],
+/*
+  We need to target all elements for widgets containing
+  multiple sub elements (e.g. RangeSlider)
+*/
+[class^='ais-'][class$='--disabled'] * {
+  cursor: not-allowed;
+}
+
+.ais-Breadcrumb,
+.ais-ClearRefinements,
+.ais-CurrentRefinements,
+.ais-ClearRefinements-button,
+.ais-GeoSearch,
+.ais-HierarchicalMenu,
+.ais-Hits,
+.ais-Results,
+.ais-HitsPerPage,
+.ais-ResultsPerPage,
+.ais-InfiniteHits,
+.ais-InfiniteResults,
+.ais-Menu,
+.ais-MenuSelect,
+.ais-NumericMenu,
+.ais-NumericSelector,
+.ais-Pagination,
+.ais-Panel,
+.ais-PoweredBy,
+.ais-RangeInput,
+.ais-RangeSlider,
+.ais-RatingMenu,
+.ais-RefinementList,
+.ais-SearchBox,
+.ais-SortBy,
+.ais-SortBy-select,
+.ais-HitsPerPage-select,
+.ais-Stats,
+.ais-ToggleRefinement {
+  color: #000;
+  font-size: 0.75rem;
+}
+
+/* Highlighting */
+
+.ais-Highlight-highlighted,
+.ais-Snippet-highlighted {
+  background: #e6ebf7;
+}
+
+/* InfiniteHits */
+
+.ais-InfiniteHits-list {
+  display: grid;
+  grid-gap: 2.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 680px) {
+  .ais-InfiniteHits-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ais-InfiniteHits-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Menus */
+
+.ais-RefinementList-item,
+.ais-Menu-item,
+.ais-NumericMenu-item,
+.ais-HierarchicalMenu-item,
+.ais-RatingMenu-item {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.ais-RefinementList-item,
+/*
+ The refinement list item in InstantSearch.js contains a wrapping `div` because of
+ the template behavior. We therefore need to apply the styles to all the elements
+ in a refinement list.
+*/
+.ais-RefinementList-item *,
+.ais-NumericMenu-item,
+.ais-NumericMenu-item *,
+.ais-RatingMenu-item {
+  cursor: pointer;
+}
+
+.ais-HierarchicalMenu-link,
+.ais-RatingMenu-item,
+.ais-NumericMenu-item,
+.ais-RefinementList-item {
+  padding-bottom: 1rem;
+}
+
+.ais-Breadcrumb-item--selected,
+.ais-HierarchicalMenu-item--selected,
+.ais-NumericMenu-item--selected,
+.ais-Menu-item--selected {
+  font-weight: bold;
+}
+
+.ais-RatingMenu-starIcon--full {
+  fill: #6634d1;
+}
+
+.ais-RatingMenu-starIcon--empty {
+  fill: rgba(0, 0, 0, 0.08);
+}
+
+/* Panel */
+
+.ais-Panel--collapsible {
+  position: relative;
+}
+
+.ais-Panel--collapsed .ais-Panel-body,
+.ais-Panel--collapsed .ais-Panel-footer {
+  display: none;
+}
+
+.ais-Panel-collapseButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  right: 0;
+}
+
+.ais-Panel-header {
+  font-family: Montserrat;
+  font-size: 0.875rem;
+  font-weight: bold;
+  padding-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+/* Search box */
+
+.ais-SearchBox-form {
+  position: relative;
+}
+
+.ais-SearchBox-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #e6ebf7;
+  color: 000;
+  font-family: inherit;
+  font-size: 1.4375rem;
+  outline: none;
+  padding: 0.5rem 0.5rem 0.5rem 56px;
+}
+
+.ais-SearchBox-input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  opacity: 1; /* Firefox */
+}
+
+.ais-SearchBox-input:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.ais-SearchBox-input::-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.ais-SearchBox-reset,
+.ais-SearchBox-loadingIndicator,
+.ais-SearchBox-submit {
+  align-items: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: flex;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+}
+
+.ais-SearchBox-submit[hidden],
+.ais-SearchBox-reset[hidden],
+.ais-SearchBox-loadingIndicator[hidden] {
+  display: none;
+}
+
+.ais-SearchBox-submit {
+  left: 0;
+}
+
+.ais-SearchBox-submit svg {
+  color: #fff;
+  height: 19px;
+  width: 19px;
+}
+
+.ais-SearchBox-reset,
+.ais-SearchBox-loadingIndicator {
+  right: 0;
+}
+
+.ais-SearchBox-resetIcon {
+  height: 10px;
+  width: 10px;
+}
+
+/* SFFV search box */
+
+.ais-RefinementList .ais-SearchBox-input {
+  border-radius: 3px;
+  color: rgba(33, 36, 61, 0.8);
+  font-size: 0.875rem;
+  padding: 0.5rem 1.5rem;
+  width: 100%;
+}
+
+.ais-RefinementList .ais-SearchBox-form {
+  margin-bottom: 1rem;
+}
+
+.ais-RefinementList .ais-SearchBox-submit svg {
+  color: #e6ebf7;
+  height: 17px;
+  width: 17px;
+}
+
+/* Menus */
+
+.ais-HierarchicalMenu-link,
+.ais-RatingMenu-link,
+.ais-RefinementList-label {
+  align-items: center;
+  display: flex;
+}
+
+.ais-RefinementList-checkbox,
+.ais-NumericMenu-radio {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: 2px solid #e6ebf7;
+  height: 1.25rem;
+  margin: 0;
+  margin-right: 0.5rem;
+  min-width: 1.25rem;
+  position: relative;
+  transition: border-color 100ms;
+}
+
+.ais-RefinementList-checkbox {
+  border-radius: 4px;
+}
+
+.ais-RefinementList-item--selected {
+  font-weight: bold;
+}
+
+.ais-RefinementList-item--selected .ais-RefinementList-checkbox {
+  background-color: #6634d1;
+  border-color: #6634d1;
+}
+
+.ais-RefinementList-item--selected .ais-RefinementList-checkbox::after,
+.ais-NumericMenu-item--selected .ais-NumericMenu-radio::after {
+  background-color: #fff;
+  border-radius: 4px;
+  content: '';
+  height: 4px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateX(-2px) translateY(-2px);
+  width: 4px;
+}
+
+.ais-RefinementList-item:not(.ais-RefinementList-item--selected)
+  .ais-RefinementList-checkbox:hover {
+  border-color: #6634d1;
+}
+
+.ais-NumericMenu-label {
+  align-items: center;
+  display: flex;
+}
+
+.ais-NumericMenu-radio {
+  border-radius: 50%;
+}
+
+.ais-NumericMenu-item--selected .ais-NumericMenu-radio {
+  background-color: #6634d1;
+  border-color: #6634d1;
+}
+
+.ais-NumericMenu-item:not(.ais-NumericMenu-item--selected)
+  .ais-NumericMenu-radio:hover {
+  border-color: #6634d1;
+}
+
+.ais-HierarchicalMenu-count,
+.ais-Menu-count,
+.ais-RefinementList-count,
+.ais-ToggleRefinement-count,
+.ais-RatingMenu-count {
+  align-items: center;
+  background-color: #e6ebf7;
+  border-radius: 4px;
+  color: #6634d1;
+  color: 6634d1;
+  display: flex;
+  font-size: 0.6875rem;
+  margin-left: 0.625rem;
+  min-height: 21px;
+  padding: 3px 8px;
+}
+
+/* Selectors */
+
+.ais-SortBy,
+.ais-HitsPerPage {
+  position: relative;
+}
+
+.ais-SortBy::after,
+.ais-HitsPerPage::after {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9' viewBox='0 0 16 9'%3E%3Cpath fill='none' fill-rule='evenodd' stroke='%236634D1' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M1 1l7 7 7-7'/%3E%3C/svg%3E%0A");
+  display: inline-block;
+}
+
+.ais-SortBy-select,
+.ais-HitsPerPage-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Stats */
+
+.ais-Stats {
+  color: #6e7070;
+  font-size: 0.875rem;
+}

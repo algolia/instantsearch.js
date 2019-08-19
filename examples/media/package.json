@@ -3,6 +3,25 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "rm -rf ./dist/ && rsync -r . ./dist/"
+    "start": "parcel index.html --port 3000",
+    "build": "parcel build index.html --public-url .",
+    "lint": "eslint --ext .js,.ts,.tsx ."
+  },
+  "dependencies": {
+    "algoliasearch": "3.33.0",
+    "date-fns": "1.30.1",
+    "instantsearch.js": "3.5.4"
+  },
+  "devDependencies": {
+    "@types/algoliasearch": "^3.30.12",
+    "@types/date-fns": "^2.6.0",
+    "babel-eslint": "10.0.2",
+    "eslint": "5.16.0",
+    "eslint-config-algolia": "13.3.0",
+    "eslint-config-prettier": "4.3.0",
+    "eslint-plugin-import": "2.17.2",
+    "eslint-plugin-prettier": "3.1.0",
+    "parcel-bundler": "1.12.3",
+    "prettier": "1.17.1"
   }
 }

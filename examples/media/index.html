@@ -1,63 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>Media search by Algolia</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#e2a400" />
+
+    <base href="/examples/media/" />
+
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="shortcut icon" href="./favicon.png" />
+
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/bootstrap/3.3.5/css/bootstrap.min.css"
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,600&font-display=swap"
     />
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+      href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto"
-    />
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="./src/theme.css" />
+    <link rel="stylesheet" href="./src/app.css" />
+    <link rel="stylesheet" href="./src/app.desktop.css" />
+
+    <title>Media demo | Algolia</title>
   </head>
 
   <body>
-    <header class="row">
-      <div>
-        <a
-          href="https://community.algolia.com/instantsearch.js/"
-          class="is-logo"
-          ><img src="logo-is.png" width="40"/></a
-        ><a href="./" class="logo">You<i class="fa fa-youtube-play"></i></a>
+    <header class="header">
+      <p class="header-logo">
+        <a href="https://algolia.com" aria-label="Go to the Algolia website">
+          <svg viewBox="0 0 93 24">
+            <path
+              fill="#fff"
+              fill-rule="nonzero"
+              d="M18.46 0a2.805 2.805 0 0 1 2.797 2.808v15.718a2.805 2.805 0 0 1-2.799 2.807H2.8A2.805 2.805 0 0 1 0 18.526V2.8A2.8 2.8 0 0 1 2.799 0h15.66zm-7.587 5.39c-3.314 0-6.004 2.698-6.004 6.03 0 3.334 2.69 6.025 6.004 6.025 3.315 0 6.005-2.699 6.005-6.031S14.194 5.39 10.873 5.39zm0 10.276a4.24 4.24 0 0 1-4.23-4.245 4.24 4.24 0 0 1 4.23-4.245 4.24 4.24 0 0 1 4.23 4.245 4.236 4.236 0 0 1-4.23 4.245zm0-4.459c0 .09.097.154.18.11l2.8-1.454c.064-.032.083-.11.051-.175a3.48 3.48 0 0 0-2.9-1.767c-.065 0-.13.052-.13.123v3.163zM6.953 5.72l-.369-.368a.914.914 0 0 0-1.302 0l-.438.44a.923.923 0 0 0 0 1.306l.36.363c.06.06.141.045.194-.012a6.726 6.726 0 0 1 1.534-1.542c.065-.039.071-.13.02-.187zM12.84 4.03a.924.924 0 0 0-.922-.926H9.77a.925.925 0 0 0-.922.926v.75c0 .084.078.143.162.123a6.749 6.749 0 0 1 3.676-.018.126.126 0 0 0 .155-.122l-.001-.733zm42.686 13.534c0 1.94-.494 3.356-1.492 4.258-.996.9-2.519 1.35-4.57 1.35-.75 0-2.308-.146-3.553-.421l.459-2.253c1.043.22 2.418.277 3.138.277 1.142 0 1.958-.232 2.444-.697.49-.467.729-1.155.729-2.071v-.464a8.568 8.568 0 0 1-1.114.421c-.458.138-.99.211-1.586.211a5.99 5.99 0 0 1-2.147-.37 4.485 4.485 0 0 1-1.666-1.09c-.459-.48-.824-1.083-1.076-1.803-.255-.72-.386-2.004-.386-2.949 0-.884.137-1.996.407-2.736.276-.741.67-1.381 1.201-1.91.523-.531 1.164-.938 1.913-1.237a7.033 7.033 0 0 1 2.584-.486c.924 0 1.775.117 2.604.253.83.14 1.536.285 2.113.444v11.275l-.002-.002zm-7.91-5.608c0 1.192.262 2.514.787 3.067.523.55 1.2.827 2.03.827.451 0 .88-.067 1.28-.187.399-.125.72-.27.975-.445V8.165a11.296 11.296 0 0 0-1.877-.24c-1.033-.026-1.82.394-2.373 1.067-.544.677-.823 1.861-.823 2.965h.001zm21.417 0c0 .96-.139 1.686-.422 2.478a5.845 5.845 0 0 1-1.2 2.026 5.301 5.301 0 0 1-1.862 1.3c-.728.304-1.85.48-2.409.48-.56-.009-1.674-.169-2.394-.48a5.44 5.44 0 0 1-1.856-1.301c-.518-.56-.916-1.235-1.209-2.027a6.715 6.715 0 0 1-.436-2.477c0-.96.13-1.88.423-2.667a5.927 5.927 0 0 1 1.222-2.013 5.469 5.469 0 0 1 1.863-1.29c.72-.307 1.514-.451 2.373-.451.86 0 1.652.152 2.38.45A5.163 5.163 0 0 1 67.37 7.28c.518.56.917 1.226 1.21 2.013.305.783.456 1.707.456 2.664l-.002.001zm-2.91.007c0-1.227-.27-2.25-.794-2.96-.524-.72-1.259-1.077-2.198-1.077-.938 0-1.674.356-2.197 1.076-.524.717-.779 1.733-.779 2.96 0 1.244.262 2.08.784 2.8.526.725 1.262 1.08 2.2 1.08.938 0 1.674-.363 2.197-1.08.524-.728.784-1.556.784-2.8l.003.001zm9.247 6.28c-4.663.02-4.663-3.764-4.663-4.368L70.7.451 73.543 0v13.336c0 .343 0 2.507 1.828 2.515v2.39l-.001.003zm5.015 0h-2.859V5.976l2.86-.45v12.718zM78.95 4.187h.003a1.73 1.73 0 0 1-1.732-1.723c0-.95.77-1.72 1.73-1.72.963 0 1.733.77 1.733 1.72 0 .952-.777 1.723-1.734 1.723zm8.546 1.35c.938 0 1.732.116 2.373.347.641.235 1.155.56 1.535.973.379.416.649.983.808 1.579.168.595.249 1.25.249 1.968v7.307c-.436.096-1.1.205-1.987.336-.887.13-1.884.196-2.989.196a9.039 9.039 0 0 1-2.017-.214c-.61-.137-1.129-.362-1.565-.674a3.261 3.261 0 0 1-1.012-1.206c-.24-.493-.364-1.192-.364-1.92 0-.696.138-1.138.406-1.618.28-.48.649-.871 1.116-1.176a4.744 4.744 0 0 1 1.628-.654 9.197 9.197 0 0 1 2.925-.138 8.4 8.4 0 0 1 1.107.196v-.467c0-.325-.036-.637-.117-.928a2.003 2.003 0 0 0-.406-.776 1.895 1.895 0 0 0-.77-.523 3.375 3.375 0 0 0-1.218-.218c-.655 0-1.251.08-1.797.173a8.493 8.493 0 0 0-1.34.328l-.342-2.333c.356-.12.887-.246 1.571-.368.685-.124 1.42-.19 2.206-.19zm.239 10.307c.874 0 1.521-.05 1.973-.137v-2.891a5.441 5.441 0 0 0-.684-.14 6.908 6.908 0 0 0-.99-.072c-.312 0-.633.023-.953.073-.319.044-.61.131-.866.254a1.58 1.58 0 0 0-.618.524c-.16.226-.232.356-.232.697 0 .67.232 1.053.655 1.31.429.26.996.386 1.718.386l-.003-.004zM31.543 5.609c.94 0 1.732.118 2.373.35.64.232 1.156.56 1.536.973.385.421.647.98.807 1.576.168.596.247 1.25.247 1.97v7.306c-.438.093-1.098.204-1.986.333-.89.134-1.886.198-2.993.198a9.05 9.05 0 0 1-2.015-.211c-.612-.137-1.13-.363-1.566-.675a3.274 3.274 0 0 1-1.01-1.208c-.241-.493-.365-1.19-.365-1.917 0-.697.139-1.141.408-1.62.277-.48.647-.87 1.114-1.176a4.748 4.748 0 0 1 1.63-.653 9.333 9.333 0 0 1 1.934-.196 8.806 8.806 0 0 1 2.096.256v-.467c0-.325-.035-.64-.115-.93a1.986 1.986 0 0 0-.408-.775 1.92 1.92 0 0 0-.773-.524A3.374 3.374 0 0 0 31.243 8c-.655 0-1.252.08-1.798.174a8.018 8.018 0 0 0-1.338.328l-.343-2.334c.36-.122.89-.245 1.574-.369.681-.13 1.417-.19 2.202-.19h.003zm.247 10.316c.874 0 1.521-.049 1.973-.137v-2.892a5.524 5.524 0 0 0-.686-.14 6.923 6.923 0 0 0-.99-.072c-.313 0-.633.023-.956.073a2.88 2.88 0 0 0-.863.254 1.575 1.575 0 0 0-.62.524c-.159.226-.232.356-.232.697 0 .67.231 1.053.654 1.31.42.253.996.386 1.716.386l.004-.003zm11.535 2.32c-4.664.02-4.664-3.764-4.664-4.368L38.651.451 41.494 0v13.336c0 .343 0 2.507 1.828 2.515v2.39l.003.004z"
+            />
+          </svg>
+        </a>
+      </p>
+
+      <div class="header-content">
+        <div class="searchbox-container">
+          <label for="search-input">
+            <svg
+              data-layout="mobile"
+              class="magnifier-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="22"
+              height="22"
+              viewBox="0 0 22 22"
+            >
+              <defs>
+                <path
+                  id="a"
+                  d="M20.981 19.094l-4.2-4.199c2.733-3.656 2.473-8.84-.848-12.161a9.333 9.333 0 0 0-13.2 13.199c3.323 3.322 8.507 3.581 12.163.848l4.198 4.2c.522.52 1.366.52 1.887 0 .52-.522.52-1.366 0-1.887zm-6.933-5.047a6.668 6.668 0 0 1-9.428 0 6.666 6.666 0 0 1 0-9.428 6.666 6.666 0 0 1 9.428 0 6.668 6.668 0 0 1 0 9.428z"
+                />
+                <linearGradient
+                  id="b"
+                  x1="100%"
+                  x2="0%"
+                  y1="85.172%"
+                  y2="14.828%"
+                >
+                  <stop offset="0%" stop-color="#764BA2" />
+                  <stop offset="100%" stop-color="#667EEA" />
+                </linearGradient>
+              </defs>
+              <g fill="none" fill-rule="evenodd">
+                <mask id="c" fill="#fff">
+                  <use xlink:href="#a" />
+                </mask>
+                <use fill="#4BC0D9" xlink:href="#a" />
+                <path fill="url(#b)" d="M-3-3h31v26H-3z" mask="url(#c)" />
+              </g>
+            </svg>
+            <svg
+              data-layout="desktop"
+              class="magnifier-icon"
+              viewBox="0 0 17 17"
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M16.69 15.189l-3.341-3.34c2.174-2.908 1.967-7.032-.675-9.674a7.424 7.424 0 1 0-10.5 10.5c2.643 2.642 6.767 2.848 9.675.674l3.34 3.34a1.063 1.063 0 0 0 1.5 0 1.063 1.063 0 0 0 0-1.5zm-5.288-3.787A5.37 5.37 0 0 1 3.81 3.81a5.368 5.368 0 1 1 7.592 7.592z"
+              />
+            </svg>
+          </label>
+
+          <div
+            data-widget="selected-topics-desktop"
+            data-layout="desktop"
+          ></div>
+          <div data-widget="searchbox" class="searchbox-container-input"></div>
+          <button
+            data-action="toggle-filters"
+            class="container-filters-button"
+            title="Filter"
+            data-layout="mobile"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 22">
+              <g
+                fill="none"
+                fill-rule="evenodd"
+                stroke="#7259B6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              >
+                <path
+                  d="M4.273 20.636V13M4.273 8.636V1M13 20.636v-9.818M13 6.455V1M21.727 20.636v-5.454M21.727 10.818V1M1 13h6.545M9.727 6.455h6.546M18.455 15.182H25"
+                />
+              </g>
+            </svg>
+          </button>
+        </div>
+
+        <div class="topics-container">
+          <div
+            class="selected-topics-mobile"
+            data-widget="selected-topics-mobile"
+            data-layout="mobile"
+          ></div>
+          <div data-widget="topics"></div>
+        </div>
       </div>
-      <div class="searchbox-container" id="searchbox"></div>
     </header>
 
-    <section>
-      <aside>
-        <ul id="home" class="nav nav-list">
-          <li>
-            <a href=""><i class="fa fa-home"></i> Home</a>
-          </li>
-          <li class="separator"></li>
-        </ul>
+    <main class="container">
+      <div class="powered-by">
+        <a href="https://developer.nytimes.com/">
+          <img src="images/nytimes.png" alt="Data provided by New York Times" />
+        </a>
+      </div>
 
-        <div id="genres"></div>
-        <div id="ratings"></div>
+      <div class="container-filters" data-layout="desktop">
+        <div class="container-filters-left">
+          <button data-action="toggle-filters" class="container-filters-button">
+            <svg viewBow="0 0 16 13">
+              <path
+                d="M2.91 12V7.72m0-2.44V1M8 12V6.5m0-2.44V1m5.09 11V8.94m0-2.44V1M1 7.72h3.82m1.27-3.66h3.82m1.27 4.88H15"
+                fill="none"
+                fill-rule="evenodd"
+                stroke="#7C56DD"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              />
+            </svg>
 
-        <div class="thank-you">
-          Data courtesy of <a href="https://www.imdb.com/">imdb.com</a>
+            <h2 class="container-filters-title">
+              Filter
+            </h2>
+          </button>
+
+          <div data-widget="stats" class="container-filters-filter"></div>
+          <div
+            data-widget="clear-filters-desktop"
+            class="container-filters-filter"
+          ></div>
         </div>
-      </aside>
 
-      <article>
-        <div id="stats" class="text-right text-muted"></div>
-        <hr />
-        <div id="hits"></div>
-        <div id="pagination" class="text-center"></div>
-      </article>
-    </section>
+        <div data-widget="sort-by-desktop"></div>
+      </div>
 
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Array.prototype.includes"></script>
-    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@3.32.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@3.0.0"></script>
-    <script src="search.js"></script>
+      <div
+        id="filters"
+        class="container-filters-panel container-filters-panel--hidden"
+      >
+        <div
+          data-layout="desktop"
+          class="container-filters-panel-column-wrapper"
+        >
+          <div
+            data-widget="categories-desktop"
+            class="container-filters-panel-column"
+          ></div>
+          <div
+            data-widget="locations-desktop"
+            class="container-filters-panel-column"
+          ></div>
+          <div
+            data-widget="dates-desktop"
+            class="container-filters-panel-column"
+          ></div>
+        </div>
+        <div data-layout="mobile" class="container-filters-panel-mobile">
+          <div class="container-filters-header">
+            <h2 class="container-filters-title">
+              Filters
+            </h2>
+            <div data-widget="clear-filters-mobile"></div>
+          </div>
+          <div data-widget="sort-by-mobile"></div>
+          <div data-widget="dates-mobile"></div>
+          <div data-widget="categories-mobile"></div>
+          <div data-widget="locations-mobile"></div>
+          <div class="container-filters-footer">
+            <button class="see-results-button">
+              <div data-widget="see-results-button"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <section class="container-results">
+        <div data-widget="hits"></div>
+      </section>
+    </main>
+
+    <aside class="back-to-top">
+      <a href="#" title="Back to top">
+        <svg viewBow="0 0 40 40">
+          <defs>
+            <linearGradient id="d" x1="100%" x2="0%" y1="100%" y2="0%">
+              <stop offset="0%" stop-color="#764ba2" />
+              <stop offset="100%" stop-color="#667eea" />
+            </linearGradient>
+          </defs>
+          <g fill="none" fill-rule="evenodd">
+            <circle cx="20" cy="20" r="20" fill="url('#d')" />
+            <path
+              stroke="#FFF"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              d="M28 20l-8-8-8 8m8 8V12"
+            />
+          </g>
+        </svg>
+      </a>
+    </aside>
+
+    <script src="./src/app.ts"></script>
   </body>
 </html>
