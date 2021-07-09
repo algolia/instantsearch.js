@@ -114,7 +114,7 @@
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.18.2",
     "eslint-plugin-jasmine": "4.1.0",
-    "eslint-plugin-jest": "24.3.5",
+    "eslint-plugin-jest": "24.3.6",
     "eslint-plugin-prettier": "3.3.1",
     "eslint-plugin-react": "7.18.0",
     "eslint-plugin-react-hooks": "2.3.0",
