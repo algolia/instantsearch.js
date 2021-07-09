@@ -75,7 +75,7 @@
     "@storybook/addon-actions": "5.3.9",
     "@storybook/html": "5.3.9",
     "@storybook/theming": "5.3.9",
-    "@testing-library/dom": "7.9.0",
+    "@testing-library/dom": "7.31.2",
     "@testing-library/jest-dom": "4.1.0",
     "@testing-library/preact": "1.0.2",
     "@types/classnames": "^2.2.7",
