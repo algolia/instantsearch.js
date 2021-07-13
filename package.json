@@ -124,7 +124,7 @@
     "jest-environment-jsdom": "26.6.2",
     "jest-environment-jsdom-global": "2.0.4",
     "jest-junit": "12.2.0",
-    "jest-watch-typeahead": "0.6.2",
+    "jest-watch-typeahead": "0.6.4",
     "jscodeshift": "0.7.0",
     "jsdom-global": "3.0.2",
     "places.js": "1.17.1",
