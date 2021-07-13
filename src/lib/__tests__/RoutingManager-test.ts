@@ -4,8 +4,10 @@ import qs from 'qs';
 import { createSearchClient } from '../../../test/mock/createSearchClient';
 import { createWidget } from '../../../test/mock/createWidget';
 import { runAllMicroTasks } from '../../../test/utils/runAllMicroTasks';
+import { wait } from '../../../test/utils/wait';
 import { Router, Widget, UiState, StateMapping, RouteState } from '../../types';
 import historyRouter from '../routers/history';
+import simple from '../stateMappings/simple';
 import instantsearch from '../main';
 
 const createFakeRouter = (args: Partial<Router> = {}): Router => ({
@@ -536,6 +538,51 @@ describe('RoutingManager', () => {
           triggerChange: true,
         },
       });
+    });
+    test('cleans URL on dispose', async () => {
+      const searchClient = createSearchClient();
+      const writeDelay = 400;
+
+      const search = instantsearch({
+        indexName: 'indexName',
+        searchClient,
+        routing: {
+          router: historyRouter({
+            writeDelay,
+          }),
+          stateMapping: simple(),
+        },
+      });
+
+      const fakeSearchBox: any = createFakeSearchBox();
+      search.addWidgets([fakeSearchBox]);
+
+      search.start();
+
+      await runAllMicroTasks();
+
+      // Wait for ${writeDelay} to pass then check URL has been initialized
+      await wait(1.5 * writeDelay);
+      expect(window.location.search).toEqual(``);
+      expect(window.history.length).toEqual(1);
+
+      // Trigger an update - push a change
+      fakeSearchBox.refine('Apple');
+
+      // Wait for ${writeDelay} to pass then check URL has been updated
+      await wait(1.5 * writeDelay);
+      expect(window.location.search).toEqual(
+        `?${encodeURI('indexName[query]=Apple')}`
+      );
+      expect(window.history.length).toEqual(2);
+
+      // Trigger a dispose
+      search.dispose();
+
+      // Wait for ${writeDelay} to pass then check URL has been cleaned
+      await wait(1.5 * writeDelay);
+      expect(window.location.search).toEqual('');
+      expect(window.history.length).toEqual(2);
     });
   });
 
