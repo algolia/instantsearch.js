@@ -103,7 +103,7 @@
     "babel-plugin-polyfill-es-shims": "0.0.7",
     "babel-plugin-transform-react-pure-class-to-function": "1.0.1",
     "bundlesize": "0.18.0",
-    "conventional-changelog-cli": "2.0.31",
+    "conventional-changelog-cli": "2.1.1",
     "doctoc": "1.4.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-preact-pure": "2.2.0",
