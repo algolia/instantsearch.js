@@ -3,7 +3,46 @@
 var search = instantsearch({
   indexName: 'movies',
   searchClient: algoliasearch('latency', '6be0576ff61c053d5f9a3225e2a90f76'),
-  routing: true,
+  routing: {
+    router: instantsearch.routers.pattern({
+      // Notes:
+      // has to start with /
+      // stateMapping to a flat object is required for any key in the path
+      // never put two optional values adjacent
+      //   - ambiguous when first value is empty
+      // value can not be empty string, but can be undefined
+      //   - make sure you filter out empty strings in stateToRoute
+      // unlisted parameters go to query string.
+      pattern: '/genre/:genre*/rating/:rating?',
+    }),
+    stateMapping: {
+      stateToRoute({ movies: indexUiState = {} } = {}) {
+        const {
+          query,
+          refinementList: { genre } = {},
+          ratingMenu: { rating } = {},
+        } = indexUiState;
+        return {
+          query,
+          genre,
+          rating,
+        };
+      },
+      routeToState({ query, genre, rating } = {}) {
+        return {
+          movies: {
+            query,
+            refinementList: {
+              genre,
+            },
+            ratingMenu: {
+              rating,
+            },
+          },
+        };
+      },
+    },
+  },
 });
 
 search.addWidgets([
