@@ -55,6 +55,9 @@ jobs:
       - run:
           name: Type Checking
           command: yarn run type-check
+      - run:
+          name: Type Export
+          command: yarn run build:types
 
   'type check algoliasearch v3':
     <<: *defaults
